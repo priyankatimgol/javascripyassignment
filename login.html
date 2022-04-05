@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script>
+
+function validatecases() {
+	var number=document.getElementById('number').value;
+	var cleaned = ('' + number).replace(/\D/g, '');
+	var name = document.getElementById('name').value;
+    var email = document.getElementById('email').value;
+	var emaill_err_msg = document.getElementById('error_msg_email').value;
+	var name_error = document.getElementById("error_msg_name");
+	var email_error = document.getElementById("error_msg_email");
+    var number_err_msg = document.getElementById('error_msg_number').value;
+	var number_error = document.getElementById("error_msg_number");
+	alert("name: "+ name);
+	alert("email: "+ email);
+	var name_regex = /^[a-z][a-z\s]*$/;
+    var validRegex_Email = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+	var match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/);
+	if(name.match(name_regex)){
+		document.getElementById("error_msg_name").style.display ='none';
+	}else{
+		name_error.classList.remove("hidden");
+	}
+	if (email.match(validRegex_Email)) {	
+		document.getElementById("error_msg_email").style.display ='none';
+	} else {
+		email_error.classList.remove("hidden");
+	}
+
+  if (match) {
+    document.getElementById("error_msg_number").style.display ='none';
+    let intlCode = (match[1] ? '+1 ' : '')
+    var result=[intlCode, '(', match[2], ') ','-' ,match[3], '-', match[4]].join('')
+  }
+  else{
+  number_error.classList.remove("hidden");
+}
+
+	const val = Math.floor(1000 + Math.random() * 9000);
+	console.log(val);
+	localStorage.setItem("name", JSON.stringify(name));
+	localStorage.setItem("number",result);
+	localStorage.setItem("OTP", val);
+  }
+ 
+ 
+</script>
+<style>
+.container {   
+        padding: 25px; 
+    }
+.error_msg_name{
+	color: red;
+	margin-left: 129px;
+}
+#email{
+	margin-left: 72px;
+}
+#name{
+	margin-left: 35px;
+}
+.error_msg_email{
+	color: red;
+	margin-left: 129px;
+}
+.hidden{
+	display: none;
+}
+p{
+	margin: 0;
+}
+.submit_btn{
+	text-align: center;
+}
+</style>
+</head>
+<body>  
+    <form name="form1" method="POST" action="thankYouPage.html">  
+        <div class="container" class="validate">  
+			Full Name: <input type='text' name='name' id="name" /><br><br>
+			<span class ="error_msg_name hidden" id="error_msg_name">Name should only contain alphabate & space</span><br><br>
+            <label for="email">Email: </label>   
+            <input type="text" name="email" id="email"><br><br/>
+			<p class ="error_msg_email hidden" id="error_msg_email">Invalid email address</p><br>
+			<label>Phone Number: </label>   
+            <input type="tel"  name="number" id="number" >  <br> <br>
+			<p class="error_msg_number hidden" id="error_msg_number">Only numbers allowed</p>
+			<input type="submit" name="validate" value="submit" onclick="validatecases()" class="submit_btn"/>
+            
+        </div>
+</form>
+
+
+  
+
+  
+</body>
+</html>
