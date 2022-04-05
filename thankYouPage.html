@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body>
+<p id="display_name"></p>
+ <p>Thank you for your inquiry.</p>
+ <p>A4 digit verification number has been send to your phone number,<p id="display_number"</p></p>
+ <p>please enter in the following box and sumbit for confirmation :</p>
+
+<lable>OTP:</lable>
+<input type="text" id="otp"><br><br>
+<input type="button" name="validate" value="Validate" onclick="validateOTP()">
+
+<script>
+	var name_value = localStorage.getItem("name");
+	var number = localStorage.getItem("number");
+	var otp_value = localStorage.getItem("OTP");
+	console.log("phone number:",number);
+	console.log("Generated OTP:" , otp_value);
+	document.getElementById("display_name").innerHTML = "Dear " + JSON.parse(name_value);
+		document.getElementById("display_number").innerHTML = number;
+
+	function validateOTP(){
+	var user_entered_otp = document.getElementById('otp').value;
+		if(user_entered_otp == otp_value){
+			alert("Validation succesful");
+			window.location.href = "http://pixel6.co/";
+		}else{
+			alert("Invalid OTP");
+		}
+	}
+</script>
+</body>
+</html>
